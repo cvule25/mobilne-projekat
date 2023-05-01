@@ -13,7 +13,8 @@
         android:orientation="horizontal"
         android:minHeight="20dp"
         android:background="#039BE5"
-        android:elevation="3dp">
+        android:elevation="3dp"
+        android:gravity="center">
 <!--        Player 1-->
         <LinearLayout
             android:layout_width="wrap_content"
@@ -34,35 +35,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/player1Name"
-                    android:text="Player 1" />
+                    android:text="Player 1"
+                    android:textColor="@color/white"/>
             </LinearLayout>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/player1Score"
-                    android:text="Score: 0"/>
+                    android:text="Score: 0"
+                android:textColor="@color/white"/>
         </LinearLayout>
 <!--        Time-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="80dp"
+            android:layout_marginHorizontal="100dp"
+            android:gravity="center"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Time:"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/time"
+                android:textColor="@color/white"
                 android:text="00:00"/>
         </LinearLayout>
 <!--Player 2-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="right">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/player2Name"
-                    android:text="Player 1" />
+                    android:textColor="@color/white"
+                    android:text="Player 2" />
                 <ImageView
                     android:id="@+id/player2Image"
                     android:layout_width="wrap_content"
@@ -82,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/player2Score"
+                android:textColor="@color/white"
                 android:text="Score: 0"/>
         </LinearLayout>
     </LinearLayout>
