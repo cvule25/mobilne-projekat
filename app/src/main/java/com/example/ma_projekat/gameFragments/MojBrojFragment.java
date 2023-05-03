@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 import com.example.ma_projekat.R;
 
-public class SkockoFragment extends Fragment {
+public class MojBrojFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_skocko, container, false);
+        return inflater.inflate(R.layout.fragment_mojbroj, container, false);
     }
 }

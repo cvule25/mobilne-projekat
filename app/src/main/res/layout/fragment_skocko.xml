@@ -1,14 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameFragments.SkockoFragment">
+    tools:context=".gameFragments.SkockoFragment"
+    android:orientation="vertical"
+    android:background="@drawable/home_background"
+    android:gravity="center">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="650dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/koznana_questionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question Number: 1/5"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_edge"/>
+
+        "
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dorum ipsum question ?"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_edge"/>
+
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/koznazna_answer1"
+                android:layout_width="175dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Answer 1"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:background="@drawable/rounded_edge"/>
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/koznazna_answer2"
+                android:layout_width="175dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Answer 1"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:background="@drawable/rounded_edge"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/koznazna_answer3"
+                android:layout_width="175dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Answer 1"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:background="@drawable/rounded_edge"/>
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/koznazna_answer4"
+                android:layout_width="175dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Answer 1"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:background="@drawable/rounded_edge"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/koznana_nextGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="this"
+        android:text="Next Game"
+        android:backgroundTint="@color/form_blue"
+        tools:ignore="OnClick" />
+
+
+</LinearLayout>

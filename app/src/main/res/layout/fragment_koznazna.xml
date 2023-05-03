@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameFragments.KoznaznaFragment"
+    tools:context=".gameFragments.KoZnaZnaFragment"
     android:orientation="vertical"
     android:background="@drawable/home_background"
     android:gravity="center">
@@ -42,7 +42,7 @@
             android:layout_gravity="center">
             <TextView
                 android:id="@+id/koznazna_answer1"
-                android:layout_width="150dp"
+                android:layout_width="175dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Answer 1"
@@ -52,7 +52,7 @@
             <TextView
                 android:layout_marginLeft="15dp"
                 android:id="@+id/koznazna_answer2"
-                android:layout_width="150dp"
+                android:layout_width="175dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Answer 1"
@@ -68,7 +68,7 @@
             android:layout_gravity="center">
             <TextView
                 android:id="@+id/koznazna_answer3"
-                android:layout_width="150dp"
+                android:layout_width="175dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Answer 1"
@@ -78,7 +78,7 @@
             <TextView
                 android:layout_marginLeft="15dp"
                 android:id="@+id/koznazna_answer4"
-                android:layout_width="150dp"
+                android:layout_width="175dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Answer 1"
@@ -90,7 +90,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/koznana_nextGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="this"

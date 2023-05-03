@@ -12,7 +12,7 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:minHeight="20dp"
-        android:background="#039BE5"
+        android:background="@drawable/background_reversed"
         android:elevation="3dp"
         android:gravity="center">
 <!--        Player 1-->
@@ -97,7 +97,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frameLayout2"
-        android:name="com.example.ma_projekat.gameFragments.KoznaznaFragment"
+        android:name="com.example.ma_projekat.gameFragments.KoZnaZnaFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_koznazna" />
