@@ -22,7 +22,7 @@
             android:text="Moj Broj"
             android:textColor="@color/white"
             android:textSize="30dp"
-            android:textAlignment="center"
+            android:textAlignment="center"/>
 
 
 
@@ -225,6 +225,7 @@
         android:onClick="this"
         android:text="END"
         android:backgroundTint="@color/form_blue"
-        tools:ignore="OnClick" /
+        tools:ignore="OnClick"/>
 
 
+</LinearLayout>
