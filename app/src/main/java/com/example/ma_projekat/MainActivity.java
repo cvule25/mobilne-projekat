@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.example.ma_projekat.menuFragments.FriendsFragment;
+import com.example.ma_projekat.menuFragments.HomeFragment;
 import com.example.ma_projekat.menuFragments.LeaderboardFragment;
 import com.example.ma_projekat.menuFragments.LoginFragment;
 import com.example.ma_projekat.menuFragments.ProfileFragment;
@@ -59,10 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.leaderboard) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                     fragmentR(new LeaderboardFragment());
+                } else if (id == R.id.home) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    fragmentR(new HomeFragment());
                 }
                 return true;
             }
         });
+
     }
 
     private void fragmentR(Fragment fragment) {

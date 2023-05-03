@@ -13,70 +13,78 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Friends"
+        android:layout_margin="10dp"
         android:textColor="@color/white"
         android:textSize="25dp"/>
     <TableLayout
-        android:layout_width="400dp"
-        android:layout_height="600dp"
+        android:layout_width="375dp"
+        android:layout_height="550dp"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:background="@color/white">
 
-        <TableRow>
-            <ImageView android:src="@drawable/baseline_person_24"/>
+        <TableRow android:layout_margin="8dp">
+            <ImageView android:src="@drawable/baseline_person_24" android:layout_gravity="center"/>
             <TextView android:text="John Doe"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="50dp"
                 android:text="Challenge" android:backgroundTint="@color/form_blue"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="10dp"
                 android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
         </TableRow>
 
-        <TableRow>
-            <ImageView android:src="@drawable/baseline_person_24"/>
+        <TableRow android:layout_margin="8dp">
+            <ImageView android:src="@drawable/baseline_person_24" android:layout_gravity="center"/>
             <TextView android:text="John Doe"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="50dp"
                 android:text="Challenge" android:backgroundTint="@color/form_blue"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="10dp"
                 android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
         </TableRow>
 
-        <TableRow>
-            <ImageView android:src="@drawable/baseline_person_24"/>
+        <TableRow android:layout_margin="8dp">
+            <ImageView android:src="@drawable/baseline_person_24" android:layout_gravity="center"/>
             <TextView android:text="John Doe"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="50dp"
                 android:text="Challenge" android:backgroundTint="@color/form_blue"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="10dp"
                 android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
         </TableRow>
 
-        <TableRow>
-            <ImageView android:src="@drawable/baseline_person_24"/>
+        <TableRow android:layout_margin="8dp">
+            <ImageView android:src="@drawable/baseline_person_24" android:layout_gravity="center"/>
             <TextView android:text="John Doe"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="50dp"
                 android:text="Challenge" android:backgroundTint="@color/form_blue"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="10dp"
                 android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
         </TableRow>
 
-        <TableRow>
-            <ImageView android:src="@drawable/baseline_person_24"/>
+        <TableRow android:layout_margin="8dp">
+            <ImageView android:src="@drawable/baseline_person_24" android:layout_gravity="center"/>
             <TextView android:text="John Doe"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="50dp"
                 android:text="Challenge" android:backgroundTint="@color/form_blue"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="10dp"
                 android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
         </TableRow>
 
-        <TableRow>
-            <ImageView android:src="@drawable/baseline_person_24"/>
+        <TableRow android:layout_margin="8dp">
+            <ImageView android:src="@drawable/baseline_person_24" android:layout_gravity="center"/>
             <TextView android:text="John Doe"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="50dp"
                 android:text="Challenge" android:backgroundTint="@color/form_blue"/>
-            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+            <Button android:layout_height="48dp" android:layout_marginLeft="10dp"
                 android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
         </TableRow>
 
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/addFriendButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Add Friend"
+        android:backgroundTint="@color/form_blue"/>
 
 </LinearLayout>

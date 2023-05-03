@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
         android:background="#FFF4F4">
 
         <TextView
@@ -17,12 +18,13 @@
             android:layout_height="68dp"
             android:background="#164783"
             android:lineSpacingExtra="8sp"
-            android:text="<"
+            android:text="Del"
             android:textAlignment="center"
             android:textColor="#FDFAFA"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="272dp"
-            tools:layout_editor_absoluteY="296dp" />
+            tools:layout_editor_absoluteY="296dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView47"
@@ -35,7 +37,8 @@
             android:textColor="#10EC09"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="57dp"
-            tools:layout_editor_absoluteY="333dp" />
+            tools:layout_editor_absoluteY="333dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView46"
@@ -61,7 +64,8 @@
             android:textColor="#FDFAFA"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="178dp"
-            tools:layout_editor_absoluteY="194dp" />
+            tools:layout_editor_absoluteY="194dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView44"
@@ -74,7 +78,8 @@
             android:textColor="#FDFAFA"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="221dp"
-            tools:layout_editor_absoluteY="194dp" />
+            tools:layout_editor_absoluteY="194dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView36"
@@ -248,7 +253,8 @@
             android:text="(2+8)*8"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="286dp" />
+            tools:layout_editor_absoluteY="286dp"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
