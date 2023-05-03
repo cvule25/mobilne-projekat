@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menuFragments.FriendsFragment">
+    tools:context=".menuFragments.FriendsFragment"
+    android:background="@drawable/home_background"
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Friends" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Friends"
+        android:textColor="@color/white"
+        android:textSize="25dp"/>
+    <TableLayout
+        android:layout_width="400dp"
+        android:layout_height="600dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@color/white">
 
-</FrameLayout>
+        <TableRow>
+            <ImageView android:src="@drawable/baseline_person_24"/>
+            <TextView android:text="John Doe"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+                android:text="Challenge" android:backgroundTint="@color/form_blue"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+                android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/baseline_person_24"/>
+            <TextView android:text="John Doe"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+                android:text="Challenge" android:backgroundTint="@color/form_blue"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+                android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/baseline_person_24"/>
+            <TextView android:text="John Doe"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+                android:text="Challenge" android:backgroundTint="@color/form_blue"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+                android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/baseline_person_24"/>
+            <TextView android:text="John Doe"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+                android:text="Challenge" android:backgroundTint="@color/form_blue"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+                android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/baseline_person_24"/>
+            <TextView android:text="John Doe"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+                android:text="Challenge" android:backgroundTint="@color/form_blue"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+                android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView android:src="@drawable/baseline_person_24"/>
+            <TextView android:text="John Doe"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="50dp"
+                android:text="Challenge" android:backgroundTint="@color/form_blue"/>
+            <Button android:layout_height="40dp" android:layout_marginLeft="10dp"
+                android:text="Unfriend" android:backgroundTint="@color/form_blue"/>
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>

@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bublegum">#8A307F</color>
+    <color name="lightblue">#1BFFFF</color>
+    <color name="gray_blue">#6883BC</color>
+    <color name="darkblue">#2E3192</color>
+    <color name="green">#009245</color>
+    <color name="lime">#FCEE21</color>
+    <color name="form_blue">#046AB8</color>
+    <color name="form_hint">#A5A5A5</color>
 </resources>
