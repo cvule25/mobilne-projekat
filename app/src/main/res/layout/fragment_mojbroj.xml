@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".gameFragments.MojBrojFragment"
+    android:orientation="vertical"
+    android:background="@drawable/home_background"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_marginTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/mojbroj_mojbroj"
+            android:layout_marginBottom="20dp"
+            android:layout_width="160dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Moj Broj"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textAlignment="center"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/mojbroj_generisibroj"
+            android:layout_width="160dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="GENERISI BROJ"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/mojbroj_rezultat"
+            android:layout_width="390dp"
+
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Rezulat"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/mojbroj_broj1"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Broj 1"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_broj2"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Broj 2"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_broj3"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Broj 3"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_broj4"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Broj 4"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_broj5"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Broj 5"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_broj6"
+            android:layout_width="60dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Broj 6"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/mojbroj_plus"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_minus"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_mnozenje"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_deljenje"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_levazagrada"
+            android:layout_width="60dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="("
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_desnazagrada"
+            android:layout_width="60dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text=")"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/mojbroj_potrvdi"
+            android:layout_width="190dp"
+
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="POTRVDI"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/green"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <TextView
+            android:id="@+id/mojbroj_ponisti"
+            android:layout_width="190dp"
+
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="PONISTI"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/mojbroj_endGame"
+        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="this"
+        android:text="END"
+        android:backgroundTint="@color/form_blue"
+        tools:ignore="OnClick"/>
+
+
+</LinearLayout>

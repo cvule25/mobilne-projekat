@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MA-Projekat</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="koznazna">Ko Zna Zna</string>
+    <string name="asocijacije">Asocijacije</string>
+    <string name="spojnice">Spojnice</string>
+    <string name="skocko">Skocko</string>
+    <string name="korakpokorak">Korak Po Korak</string>
+    <string name="mojbroj">Moj Broj</string>
+    <string name="slagalica">Slagalica</string>
+</resources>
