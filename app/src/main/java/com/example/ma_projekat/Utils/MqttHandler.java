@@ -4,8 +4,18 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.ma_projekat.Model.Asocijacije;
+import com.example.ma_projekat.Model.Data;
+import com.example.ma_projekat.Model.Hyphens;
+import com.example.ma_projekat.Model.KorakPoKorak;
+import com.example.ma_projekat.Model.SkockoDTO;
+import com.example.ma_projekat.Model.StrDTO;
 import com.example.ma_projekat.Model.User;
+import com.example.ma_projekat.Model.UserDTO;
 import com.google.gson.Gson;
+import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
+import com.hivemq.client.mqtt.datatypes.MqttQos;
+import com.hivemq.client.mqtt.mqtt5.Mqtt5Client;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -183,6 +193,48 @@ public class MqttHandler {
                 });
     }
 
+    public void pointSubscribe(PointCallback pointCallback) {
+
+        client.toAsync().subscribeWith()
+                .topicFilter("Mobilne/Point")
+                .qos(MqttQos.AT_LEAST_ONCE)
+                .callback(mqtt5Publish -> {
+                    UserDTO user = gson.fromJson(StandardCharsets.UTF_8.decode(mqtt5Publish.getPayload().get()).toString(), UserDTO.class);
+                    if (!Objects.equals(user.getUsername(), Data.loggedInUser.getUsername())) {
+                        pointCallback.onCallback(user);
+                    }
+                })
+                .send()
+                .whenComplete((mqtt5SubAck, throwable) -> {
+                    if (throwable != null) {
+                        Log.i("mqtt", "Point Subscribe Error");
+                        throwable.printStackTrace();
+                    } else {
+//                        Log.i("mqtt", "Subscribed to point share");
+                    }
+                });
+    }
+
+    public void pointPublish(int points) {
+
+        UserDTO userDTO = new UserDTO(Data.loggedInUser.getUsername(), points, 0.0);
+        sentPayload = gson.toJson(userDTO);
+
+        client.toAsync().publishWith()
+                .topic("Mobilne/Point")
+                .qos(MqttQos.AT_LEAST_ONCE)
+                .payload(sentPayload.getBytes())
+                .send()
+                .whenComplete((mqtt5PublishResult, throwable) -> {
+                    if (throwable != null) {
+                        Log.i("mqtt", "Point Publish Error");
+                        throwable.printStackTrace();
+                    } else {
+//                        Log.i("mqtt", "Published point share");
+                    }
+                });
+    }
+
     public void textViewShareSubscribe(TextViewStoreCallback textViewStoreCallback) {
 
         client.toAsync().subscribeWith()
@@ -206,10 +258,10 @@ public class MqttHandler {
                 });
     }
 
-    public void textViewSharePublish(TextView hyphens) {
+    public void textViewSharePublish(TextView hyphens, boolean isMyTurn, boolean isStart, int counter) {
 
         ColorDrawable viewColor = (ColorDrawable) hyphens.getBackground();
-        Hyphens hyphens1 = new Hyphens(hyphens.getId(), hyphens.getText().toString(), viewColor.getColor(), Data.loggedInUser.getUsername());
+        Hyphens hyphens1 = new Hyphens(hyphens.getId(), hyphens.getText().toString(), viewColor.getColor(), Data.loggedInUser.getUsername(), isMyTurn, isStart, counter);
         sentPayload = gson.toJson(hyphens1, Hyphens.class);
         client.toAsync().publishWith()
                 .topic("Mobilne/TextViewShare")
@@ -421,6 +473,10 @@ public class MqttHandler {
         return isMyTurn;
     }
 
+    public interface PointCallback {
+        public void onCallback(UserDTO userDTO);
+    }
+
     public interface SkockoCallback {
         public void onCallback(ArrayList<String> dataList);
     }
@@ -455,3 +511,4 @@ public class MqttHandler {
         return string1;
     }
 }
+

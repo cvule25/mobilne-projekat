@@ -21,7 +21,7 @@ public class KoZnaZnaFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment nextGame = new SpojniceFragment();
+                Fragment nextGame = new HyphensFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frameLayout2, nextGame);
                 transaction.addToBackStack(null);
