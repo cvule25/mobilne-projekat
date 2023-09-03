@@ -2,9 +2,12 @@ package com.example.ma_projekat.Utils;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.ma_projekat.Model.Skocko;
 
 public class Draggable {
     public static void makeDraggable(ImageView imageView, String tag){

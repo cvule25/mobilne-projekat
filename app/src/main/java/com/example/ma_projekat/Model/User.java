@@ -1,7 +1,7 @@
 package com.example.ma_projekat.Model;
 
-import com.google.gson.annotations.SerializedName;
 
+import com.google.gson.annotations.SerializedName;
 
 public class User {
     @SerializedName("id")
@@ -43,7 +43,12 @@ public class User {
     @SerializedName("porazi")
     private int porazi;
 
-
+//    public User(String id, String username, String password, String email) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//    }
 
     public User(String id, String username, String password, String email, int koZnaZna, int spojnice, int asocijacije, int skocko, int korakPoKorak, int mojBroj, int partije, int pobede, int porazi) {
         this.id = id;
