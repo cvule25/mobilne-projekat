@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.example.ma_projekat.R;
 
 public class ProfileFragment extends Fragment {
-    View view;
-    TextView userName, email, partije, pobede, porazi, koZnaZna, korakPoKorak, mojBroj, partije, pobede, porazi;
+//    View view;
+//    TextView userName, email, partije, pobede, porazi, koZnaZna, korakPoKorak, mojBroj, partije, pobede, porazi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
