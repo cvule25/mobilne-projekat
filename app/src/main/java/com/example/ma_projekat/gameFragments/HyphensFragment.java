@@ -31,12 +31,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-public class SpojniceFragment extends Fragment {
+public class HyphensFragment extends Fragment {
     View view;
 
-    TextView btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, lastLetButton, player2UserName, p1UserName, hyphens1, hyphens2, player1Score, player2Score;
+    TextView btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,lastLetButton, player2UserName, p1UserName, hyphens1, hyphens2, player1Score, player2Score;
     Map<String, Object> map1 = new HashMap<>();
-    KorakPoKorakFragment korakPoKorakFragment = new KorakPoKorakFragment();
+    StepByStepFragment stepByStepFragment = new StepByStepFragment();
     List<TextView> leftbtns = new ArrayList<>();
     List<TextView> rightbtns = new ArrayList<>();
     List<TextView> leftReds = new ArrayList<>();
@@ -46,6 +46,7 @@ public class SpojniceFragment extends Fragment {
 
     int counter = 0;
     int counter1 = 0;
+
 
 
     boolean isClickedAgain = false;
@@ -63,6 +64,7 @@ public class SpojniceFragment extends Fragment {
     int score = 0;
     int score1 = 0;
 
+//    boolean isMyTurnOver = false;
 
     boolean isLeftTextViewClickedBoolean;
 
@@ -72,123 +74,152 @@ public class SpojniceFragment extends Fragment {
     boolean isOnline;
 
     UserRepository userRepository = new UserRepository();
-    MojBrojFragment mojBrojFragment = new MojBrojFragment();
 
 
-    public void isLeftTextViewClicked(TextView leftTextView) { // ako se klikne levo dugme postavlja se da je kliknuto desno dugme i postavljaju se desna i postavljaju se ostala desna dugmad na isCLicable false
+
+
+    public void isLeftTextViewClicked(TextView leftTextView){ // ako se klikne levo dugme postavlja se da je kliknuto desno dugme i postavljaju se desna i postavljaju se ostala desna dugmad na isCLicable false
         leftTextView11 = leftTextView;
         isLeftTextViewClickedBoolean = true;
         setClicableForLeftTextViews(leftTextView);
         chechRightTextViews();
     }
 
-    public void chechRightTextViews() { // postavljanje desnie strane za ako je levo dugme kliknuto
-        for (TextView textView : rightbtns) {
+    public void chechRightTextViews(){ // postavljanje desnie strane za ako je levo dugme kliknuto
+        for (TextView textView: rightbtns){
             ColorDrawable viewColor = (ColorDrawable) textView.getBackground();
-            if (viewColor.getColor() == Color.GREEN) {
+            if(viewColor.getColor() == Color.GREEN){
                 textView.setClickable(false);
-            } else {
+            }else{
                 textView.setEnabled(true);
             }
         }
     }
 
-
-
-    public void setClicableForLeftTextViews(TextView textVie) { // postavljanje eve strane ako je levo dugme kliknuto
-        for (TextView textView : leftbtns) {
-            if (textView.getId() == textVie.getId()) {
+    public void setClicableForLeftTextViews(TextView textVie){ // postavljanje eve strane ako je levo dugme kliknuto
+        for (TextView textView: leftbtns){
+            if(textView.getId() == textVie.getId()){
                 continue;
-            } else {
+            }else{
                 textView.setEnabled(false);
             }
         }
     }
 
-    public void setClicableForRightTextViews() {
-        for (TextView textView : rightbtns) {
+    public void setClicableForRightTextViews(){
+        for (TextView textView: rightbtns){
             textView.setEnabled(false);
         }
     }
 
-    public void setClicableForLeftTextViews() {
-        for (TextView textView : leftbtns) {
+    public void setClicableForLeftTextViews(){
+        for (TextView textView: leftbtns){
             ColorDrawable viewColor = (ColorDrawable) textView.getBackground();
-            if (viewColor.getColor() == Color.GREEN || viewColor.getColor() == Color.RED) {
-                if (!isMyTurn && isOnline && viewColor.getColor() == Color.RED) { // u slucaju online igre
+            if(viewColor.getColor() == Color.GREEN || viewColor.getColor() == Color.RED){
+                if(!isMyTurn && isOnline && viewColor.getColor() == Color.RED){ // u slucaju online igre
                     textView.setEnabled(true);
-                } else {
+                }else{
                     textView.setEnabled(false);
                 }
-            } else {
+            }else {
                 textView.setEnabled(true);
             }
         }
     }
 
-    public void setPoints() {
+    public void setPoints(){
         score1 = Integer.parseInt((String) player1Score.getText());
-        score1 += 2;
+        score1+=2;
         player1Score.setText(score1 + "");
-        if (isOnline) {
-            Data.loggedInUser.setSpojnice(Data.loggedInUser.getSpojnice() + score1);
-            userRepository.updateSpojnice(Data.loggedInUser, Data.loggedInUser.getSpojnice() + score1);
+        Data.loggedInUser.setSpojnice(Data.loggedInUser.getSpojnice()+score1);
+        if(isOnline){
+            userRepository.updateSpojnice(Data.loggedInUser, Data.loggedInUser.getSpojnice()+score1);
             mqttHandler.pointPublish(score1);
         }
     }
-
-    public void isRightTextViewClicked(TextView textView) { // ne bi trebalo da se moze kliknuti dok se ne klikne levo dugme al vidi
-        if (textView.getText().equals(leftTextView11.getText())) {
+    public void isRightTextViewClicked(TextView textView){ // ne bi trebalo da se moze kliknuti dok se ne klikne levo dugme al vidi
+        if(textView.getText().equals(leftTextView11.getText())){
             leftTextView11.setBackgroundColor(Color.GREEN);
             textView.setBackgroundColor(Color.GREEN);
             setClicableForRightTextViews();
             setClicableForLeftTextViews();
             setPoints();
             counter++;
-            if (isOnline) {
-
+            if(isOnline){
+//                counterIfAllLeftTextViewAreGreen++;
+//                if(counterIfAllLeftTextViewAreGreen == 5){
+//                    if(getArguments() == null){
+//                        getParentFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.fragment_container, HyphensFragment.newInstance(true, true))
+//                                .setReorderingAllowed(true)
+//                                .commit();
+//                    }else{
+//                        getParentFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.fragment_container, new StepByStepFragment())
+//                                .setReorderingAllowed(true)
+//                                .commit();
+//                    }
+//                }
                 mqttHandler.textViewSharePublish(leftTextView11, false, false, counter);
                 mqttHandler.textViewSharePublish(textView, false, false, 0);
             }
-        } else {
+        }else{
             leftTextView11.setBackgroundColor(Color.RED); //
             setClicableForRightTextViews(); // postavlja da su desni textView-ovi
             setClicableForLeftTextViews(); // postavlja da su levi textView-ovi moguci da se pritisnu
             counter++;
-            if (isOnline) {
+            if(isOnline){
                 mqttHandler.textViewSharePublish(leftTextView11, false, false, counter);
             }
         }
     }
 
-    public static SpojniceFragment newInstance(boolean round, boolean isOnline) {
+    public static HyphensFragment newInstance(boolean round, boolean isOnline) {
 
         Bundle args = new Bundle();
         args.putBoolean("isFirstRound", round);
         args.putBoolean("isOnline", isOnline);
 
-        SpojniceFragment fragment = new SpojniceFragment();
+        HyphensFragment fragment = new HyphensFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public void setIsMyTurn() {
-        if (isMyTurn == true) {
+    public void setIsMyTurn(){
+        if(isMyTurn == true){
             isMyTurn = false;
-        } else if (isMyTurn == false) {
+        }else if(isMyTurn == false){
             isMyTurn = true;
         }
     }
 
-    public void setIsOnline(boolean turn) {
+    //    public void setNewFragment(){
+//        if(counterIfAllLeftTextViewAreGreen == 5){
+//            if(getArguments() == null){
+//                getParentFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.fragment_container, HyphensFragment.newInstance(true, true))
+//                        .setReorderingAllowed(true)
+//                        .commit();
+//            }else{
+//                getParentFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.fragment_container, new StepByStepFragment())
+//                        .setReorderingAllowed(true)
+//                        .commit();
+//            }
+//        }
+//    }
+    public void setIsOnline(boolean turn){
         isOnline = turn;
     }
-
-    public void TempGetDataMethod(String runda) {
+    public void TempGetDataMethod(String runda){
         TempGetData.getDataAsMap(new TempGetData.FireStoreCallback1() {
             @Override
             public void onCallBack(Map<String, Object> map) {
-                if (getArguments() != null) {
+                if(getArguments() != null){
                     isOnline = getArguments().getBoolean("isOnline", false);
                 }
                 map1.putAll(map);
@@ -208,13 +239,13 @@ public class SpojniceFragment extends Fragment {
                 rightbtns.add(btn10);
 
 
-                Log.i("mqtt", "isOnline: " + isOnline);
+                Log.i("mqtt","isOnline: "+ isOnline);
                 for (TextView button : leftbtns) {
                     if (!keys.isEmpty()) {
                         int randomIndex = new Random().nextInt(keys.size());
                         String randomKey = keys.get(randomIndex);
                         button.setText(randomKey);
-                        if (isOnline) {
+                        if(isOnline){
                             mqttHandler.textViewSharePublish(button, false, true, 0);
                         }
                         keys.remove(randomIndex);
@@ -226,7 +257,7 @@ public class SpojniceFragment extends Fragment {
                         int randomIndex = new Random().nextInt(keysValues.size());
                         String randomValue = keysValues.get(randomIndex).toString();
                         button.setText(randomValue);
-                        if (isOnline) {
+                        if (isOnline){
                             mqttHandler.textViewSharePublish(button, false, true, 0);
                         }
                         keysValues.remove(randomIndex);
@@ -235,25 +266,24 @@ public class SpojniceFragment extends Fragment {
                 }
                 Log.d("LITS", map1.toString());
 
-                if (isOnline) {
+                if(isOnline){
                     isMyTurn = mqttHandler.getTurnPlayer();
-                    if (getArguments() != null) {
+                    if(getArguments() != null){
                         setIsMyTurn();
                     }
                 }
 
-                if (!isMyTurnOver && !isMyTurn && isOnline) {
-                    for (TextView textView : leftbtns) {
+                if(!isMyTurnOver && !isMyTurn && isOnline){
+                    for(TextView textView : leftbtns){
                         textView.setEnabled(false);
                     }
-                    for (TextView textView : rightbtns) {
+                    for(TextView textView : rightbtns){
                         textView.setEnabled(false);
                     }
                 }
             }
-        }, runda);
+        },runda);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -269,29 +299,55 @@ public class SpojniceFragment extends Fragment {
         btn8 = view.findViewById(R.id.spojnica_rightcolumn4);
         btn9 = view.findViewById(R.id.spojnica_leftcolumn5);
         btn10 = view.findViewById(R.id.spojnica_rightcolumn5);
-        // hyphens1 = view.findViewById(R.id.hyphens1); ANDRIJA KOMENTAR NE ZNAM DA LI JE POTREBNO
-        // hyphens2 = view.findViewById(R.id.hyphens2); ANDRIJA KOMENTAR NE ZNAM DA LI JE POTREBNO
-        player1Score = activity.findViewById(R.id.player1Score);
-        player2Score = activity.findViewById(R.id.player2Score);
+//        hyphens1 = view.findViewById(R.id.hyphens1);
+//        hyphens2 = view.findViewById(R.id.hyphens2);
+//        player1Score = activity.findViewById(R.id.player_1_score);
+//        player2Score = activity.findViewById(R.id.player_2_score);
 
 
-        if (getArguments() == null) {
+//        Button btnNext = view.findViewById(R.id.hyphens);
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getParentFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.fragment_container, new AssociationsFragment())
+//                        .setReorderingAllowed(true)
+//                        .commit();
+//            }
+//        });
+
+        if(getArguments() == null){
             TempGetDataMethod("Spojnice");
-        } else {
+        }else{
             TempGetDataMethod("Spojnice2");
         }
 
 
+//        btn1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+////                if(isMyTurn == true){
+////                    Log.d("mqtt", "isMyTurn");
+////                    setup(leftbtns, rightbtns);
+////                }else{
+////                    setupButtonListeners(leftbtns, rightbtns);
+////                }
+//                Log.i("mqtt","btn1");
+//                isLeftTextViewClicked(btn1);
+//            }
+//        });
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("mqtt", "btn1");
+                Log.i("mqtt","btn1");
                 buttonClickedCount++;
-                if (buttonClickedCount == 2) {
+                if(buttonClickedCount == 2){
                     setClicableForRightTextViews();
                     setClicableForLeftTextViews();
                     buttonClickedCount = 0;
-                } else {
+                }else{
                     isLeftTextViewClicked(btn1);
                 }
             }
@@ -300,6 +356,12 @@ public class SpojniceFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 isRightTextViewClicked(btn2);
             }
         });
@@ -307,12 +369,18 @@ public class SpojniceFragment extends Fragment {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 buttonClickedCount++;
-                if (buttonClickedCount == 2) {
+                if(buttonClickedCount == 2){
                     setClicableForRightTextViews();
                     setClicableForLeftTextViews();
                     buttonClickedCount = 0;
-                } else {
+                }else{
                     isLeftTextViewClicked(btn3);
                 }
             }
@@ -321,6 +389,12 @@ public class SpojniceFragment extends Fragment {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 isRightTextViewClicked(btn4);
             }
         });
@@ -328,12 +402,18 @@ public class SpojniceFragment extends Fragment {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 buttonClickedCount++;
-                if (buttonClickedCount == 2) {
+                if(buttonClickedCount == 2){
                     setClicableForRightTextViews();
                     setClicableForLeftTextViews();
                     buttonClickedCount = 0;
-                } else {
+                }else{
                     isLeftTextViewClicked(btn5);
                 }
             }
@@ -342,6 +422,12 @@ public class SpojniceFragment extends Fragment {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 isRightTextViewClicked(btn6);
             }
         });
@@ -349,12 +435,18 @@ public class SpojniceFragment extends Fragment {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 buttonClickedCount++;
-                if (buttonClickedCount == 2) {
+                if(buttonClickedCount == 2){
                     setClicableForRightTextViews();
                     setClicableForLeftTextViews();
                     buttonClickedCount = 0;
-                } else {
+                }else{
                     isLeftTextViewClicked(btn7);
                 }
             }
@@ -363,6 +455,12 @@ public class SpojniceFragment extends Fragment {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 isRightTextViewClicked(btn8);
             }
         });
@@ -370,12 +468,18 @@ public class SpojniceFragment extends Fragment {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 buttonClickedCount++;
-                if (buttonClickedCount == 2) {
+                if(buttonClickedCount == 2){
                     setClicableForRightTextViews();
                     setClicableForLeftTextViews();
                     buttonClickedCount = 0;
-                } else {
+                }else{
                     isLeftTextViewClicked(btn9);
                 }
             }
@@ -384,28 +488,38 @@ public class SpojniceFragment extends Fragment {
         btn10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                Log.i("mqtt", "isMyTurn: "+ isMyTurn);
+//                if(isMyTurn == true){
+//                    setup(leftbtns, rightbtns);
+//                }else{
+//                    setupButtonListeners(leftbtns, rightbtns);
+//                }
                 isRightTextViewClicked(btn10);
             }
         });
 
 
+//        setupButtonListeners(leftbtns, rightbtns);
+//        if(isMyTurn == true){
+//            setup(leftbtns, rightbtns);
+//        }else{
+//            setupButtonListeners(leftbtns, rightbtns);
+//        }
         if (Data.loggedInUser != null) {
             p1UserName.setText(Data.loggedInUser.getUsername());
         }
         return view;
     }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         activity = (AppCompatActivity) getActivity();
 
-        p1UserName = activity.findViewById(R.id.player1Name);
-        player2UserName = activity.findViewById(R.id.player2Name);
+//        p1UserName = activity.findViewById(R.id.player_1_user_name);
+//        player2UserName = activity.findViewById(R.id.player_2_user_name);
 
-        if (Data.loggedInUser != null && !player2UserName.getText().toString().equals("Guest")) {
+        if(Data.loggedInUser != null && !player2UserName.getText().toString().equals("Guest")){
             mqttHandler.pointSubscribe(new MqttHandler.PointCallback() {
                 @Override
                 public void onCallback(UserDTO userDTO) {
@@ -413,7 +527,7 @@ public class SpojniceFragment extends Fragment {
                         @Override
                         public void run() {
 //                            score1 = userDTO.getPoints();
-                            player2Score.setText(userDTO.getPoints() + "");
+                            player2Score.setText(userDTO.getPoints()+"");
                         }
                     });
                 }
@@ -421,40 +535,54 @@ public class SpojniceFragment extends Fragment {
             mqttHandler.textViewShareSubscribe(new MqttHandler.TextViewStoreCallback() {
                 @Override
                 public void onCallBack(Hyphens hyphens) {
-                    if (hyphens != null) {
+                    if(hyphens != null){
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (hyphens.getCounterIsMyTurnOver() != 0) {
+                                if(hyphens.getCounterIsMyTurnOver() != 0){
                                     counter1++;
                                 }
-                                if (counter1 == 5) {
+                                if(counter1 == 5){
                                     counter1 = 0;
                                     isMyTurnOver = true;
-                                    for (TextView textView : leftbtns) {
+                                    for(TextView textView: leftbtns){
                                         ColorDrawable viewColor = (ColorDrawable) textView.getBackground();
-                                        if (viewColor.getColor() == Color.RED) {
+                                        if(viewColor.getColor() == Color.RED){
                                             textView.setEnabled(true);
-                                        } else {
+                                        }else {
                                             counterIfAllLeftTextViewAreGreen++;
                                         }
                                     }
                                 }
-
-                                if (hyphens.isStart()) { // moramo ovo da stavimo da bi mogli da imamo iste rezultate kada se pokerne igra tj. da imamo iste podatke na istim mestima
-                                    for (TextView leftButton : leftbtns) { // ima gore salje se u startovanju igre isStarted = true i onda se postavljaju vrednosti na ista mesta
-                                        if (leftButton.getId() == hyphens.getId()) {
+//                                if(counterIfAllLeftTextViewAreGreen == 5){
+//                                    if(getArguments() == null){
+//                                        getParentFragmentManager()
+//                                                .beginTransaction()
+//                                                .replace(R.id.fragment_container, HyphensFragment.newInstance(true, true))
+//                                                .setReorderingAllowed(true)
+//                                                .commit();
+//                                    }else{
+//                                        getParentFragmentManager()
+//                                                .beginTransaction()
+//                                                .replace(R.id.fragment_container, new StepByStepFragment())
+//                                                .setReorderingAllowed(true)
+//                                                .commit();
+//                                    }
+//                                }
+                                if(hyphens.isStart()){ // moramo ovo da stavimo da bi mogli da imamo iste rezultate kada se pokerne igra tj. da imamo iste podatke na istim mestima
+                                    for (TextView leftButton: leftbtns){ // ima gore salje se u startovanju igre isStarted = true i onda se postavljaju vrednosti na ista mesta
+                                        if(leftButton.getId() == hyphens.getId()){
                                             leftButton.setText(hyphens.getText());
                                         }
                                     }
-                                    for (TextView rightButton : rightbtns) {
-                                        if (rightButton.getId() == hyphens.getId()) {
+                                    for(TextView rightButton: rightbtns){
+                                        if(rightButton.getId() == hyphens.getId()){
                                             rightButton.setText(hyphens.getText());
                                         }
                                     }
-                                } else {
-                                    for (TextView textView : leftbtns) {
-                                        if (textView.getId() == hyphens.getId()) {
+                                }else {
+                                    for(TextView textView : leftbtns){
+                                        if(textView.getId() == hyphens.getId()){
                                             textView.setBackgroundColor(hyphens.getColor());
                                             textView.invalidate();
                                             Log.i("mqtt", hyphens + "");
@@ -462,8 +590,8 @@ public class SpojniceFragment extends Fragment {
                                             //                                        textView.setClickable(false);
                                         }
                                     }
-                                    for (TextView textView : rightbtns) {
-                                        if (textView.getId() == hyphens.getId()) {
+                                    for(TextView textView : rightbtns){
+                                        if(textView.getId() == hyphens.getId()){
                                             textView.setBackgroundColor(hyphens.getColor());
                                             textView.invalidate();
                                             Log.i("mqtt", hyphens + "");
@@ -471,13 +599,25 @@ public class SpojniceFragment extends Fragment {
                                         }
                                     }
                                 }
+//                                if(hyphens.getId() == hyphens1.getId()){
+//                                    hyphens2.setBackgroundColor(hyphens.getColor());
+//                                    hyphens2.invalidate();
+//                                }
                             }
                         });
                     }
                 }
             });
         }
-        TextView scoreTimer = activity.findViewById(R.id.time);
+
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
+        ((AppCompatActivity) getActivity()).findViewById(R.id.score_board).setVisibility(View.VISIBLE);
+
+        DrawerLayout drawerLayout = getActivity().findViewById(R.id.drawer_layout);
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        TextView scoreTimer = activity.findViewById(R.id.score_timer);
 
         countDownTimer = new CountDownTimer(30000, 1000) {
             @Override
@@ -490,6 +630,8 @@ public class SpojniceFragment extends Fragment {
 
             @Override
             public void onFinish() {
+//                if(isMyTurn == true){
+//                    isMyTurn = true;
                 score = 0;
                 for(TextView textView : leftbtns){
                     ColorDrawable viewColor = (ColorDrawable) textView.getBackground();
@@ -518,9 +660,7 @@ public class SpojniceFragment extends Fragment {
                             String buttonValue = entry.getValue().toString();
                             int resIDKey = getResources().getIdentifier("btn" + i, "id", getActivity().getPackageName());
                             TextView buttonKey1 = getActivity().findViewById(resIDKey);
-                            if(isOnline){
-                                buttonKey1.setText(buttonKey);
-                            }
+                            buttonKey1.setText(buttonKey);
                             int resIDValue = getResources().getIdentifier("btn" + a, "id", getActivity().getPackageName());
                             TextView buttonValue1 = getActivity().findViewById(resIDValue);
                             buttonValue1.setText(buttonValue);
@@ -538,14 +678,14 @@ public class SpojniceFragment extends Fragment {
                         if(getArguments() == null){
                             getParentFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.frameLayout2, SpojniceFragment.newInstance(true, true))
+                                    .replace(R.id.fragment_container, HyphensFragment.newInstance(true, true))
                                     .setReorderingAllowed(true)
                                     .commit();
                         }else{
-                            korakPoKorakFragment.setIsOnline(true);
+                            StepByStepFragment.setIsOnline(true);
                             getParentFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.frameLayout2, mojBrojFragment)
+                                    .replace(R.id.fragment_container, stepByStepFragment)
                                     .setReorderingAllowed(true)
                                     .commit();
                         }
@@ -553,13 +693,31 @@ public class SpojniceFragment extends Fragment {
                 }.start();
 
             }
+//                else{
+//                    scoreTimer.setText("00:00");
+//                    isMyTurn = true;
+//                    getParentFragmentManager()
+//                            .beginTransaction()
+//                            .replace(R.id.fragment_container, new HomeFragment())
+//                            .setReorderingAllowed(true)
+//                            .commit();
+//                }
+//            }
         }.start();
 
     }
+
     @Override
     public void onStop() {
         super.onStop();
         score = 0;
+
         countDownTimer.cancel();
+
+        ShowHideElements.hideScoreBoard(activity);
+
+        activity.getSupportActionBar().show();
+
+        ShowHideElements.unlockDrawerLayout(activity);
     }
 }

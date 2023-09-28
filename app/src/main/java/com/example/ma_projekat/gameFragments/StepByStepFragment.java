@@ -2,7 +2,6 @@ package com.example.ma_projekat.gameFragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -23,51 +22,61 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ma_projekat.GameActivity;
 import com.example.ma_projekat.Model.Data;
-import com.example.ma_projekat.Model.KorakPoKorak;
-import com.example.ma_projekat.Model.UserDTO;
 import com.example.ma_projekat.R;
 import com.example.ma_projekat.Repository.UserRepository;
 import com.example.ma_projekat.Utils.MqttHandler;
-import com.example.ma_projekat.Utils.ShowHideElements;
 import com.example.ma_projekat.Utils.TempGetData;
-import com.example.ma_projekat.menuFragments.MyViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class KorakPoKorakFragment extends Fragment {
-    private MyViewModel viewModel;
+public class StepByStepFragment extends Fragment {
+
+
     View view;
+
     Dialog dialog;
-    GameActivity gameActivity;
-    TextView scoreTimer;
     CountDownTimer countDownTimer;
     AppCompatActivity activity;
+
     MqttHandler mqttHandler = new MqttHandler();
+
     TempGetData tempGetData = new TempGetData();
     TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView_answer, points_right, player1Score, player2Score,  player2UserName;
     Map<Integer, TextView> textViwMap = new HashMap<>();
     Map<String, Object> runda1 = new HashMap<>();
     ArrayList<String> arrayList = new ArrayList<>();
     int count = 2;
+
     int score = 0;
     int counter1 = 0;
-    boolean isOkButtonClicked = false;
-    String response = "";
-    boolean isAnswerCorrect = false;
-    boolean isFirstRound, isOnline, isMyTurn;
-    private AsyncTask myTask;
-    private static final String KEY_STATE = "state";
-    UserRepository userRepository = new UserRepository();
 
-    public KorakPoKorakFragment() {
+    boolean isOkButtonClicked = false;
+
+//    final String response = new String();
+
+//    private String getResponse() {
+//        return textViwMap.get(8).getText().toString();
+//    }
+
+    boolean isMyTurn;
+    boolean isAnswerCorrect = false;
+    boolean isFirstRound;
+
+    private AsyncTask myTask;
+
+    private static final String KEY_STATE = "state";
+
+    UserRepository userRepository = new UserRepository();
+    boolean isOnline;
+
+    public StepByStepFragment() {
     }
 
-    AsocijacijeFragment associationsFragment = new AsocijacijeFragment();
+//    AssociationsFragment associationsFragment = new AssociationsFragment();
     public void setIsMyTurn(){
         if(isMyTurn){
             isMyTurn = false;
@@ -76,16 +85,19 @@ public class KorakPoKorakFragment extends Fragment {
         }
     }
 
-    public static KorakPoKorakFragment newInstance(boolean round, boolean bool) {
+    public static StepByStepFragment newInstance(boolean round, boolean bool) {
 
         Bundle args = new Bundle();
         args.putBoolean("isFirstRound", round);
         args.putBoolean("isOnline", bool);
 
-        KorakPoKorakFragment fragment = new KorakPoKorakFragment();
+        StepByStepFragment fragment = new StepByStepFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
+
+
     public void TempGetDataMethod(String runda){
         TempGetData.getKorakPoKorak(new TempGetData.FireStoreCallback() {
             @Override
@@ -98,8 +110,7 @@ public class KorakPoKorakFragment extends Fragment {
                 textView5.setText(arrayList.get(4));
                 textView6.setText(arrayList.get(5));
                 textView7.setText(arrayList.get(6));
-                response = arrayList.get(7);
-//                textView_answer.setText(arrayList.get(7));
+                textView_answer.setText(arrayList.get(7));
 
                 textViwMap.put(1, textView1);
                 textViwMap.put(2, textView2);
@@ -133,80 +144,140 @@ public class KorakPoKorakFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_korak_po_korak, container, false);
-        textView1 = view.findViewById(R.id.hint1);
+        view = inflater.inflate(R.layout.fragment_step_by_step, container, false);
+        TextView next = view.findViewById(R.id.step_by_stepTextView_points_right);
+        textView1 = view.findViewById(R.id.step_by_stepTextView1);
         textView1.setTextColor(Color.RED);
-        textView2 = view.findViewById(R.id.hint2);
-        textView3 = view.findViewById(R.id.hint3);
-        textView4 = view.findViewById(R.id.hint4);
-        textView5 = view.findViewById(R.id.hint5);
-        textView6 = view.findViewById(R.id.hint6);
-        textView7 = view.findViewById(R.id.hint7);
-        textView_answer = view.findViewById(R.id.korakpokorak_answer);
-        player1Score = activity.findViewById(R.id.player1Score);
-        player2Score = activity.findViewById(R.id.player2Score);
+        textView2 = view.findViewById(R.id.step_by_stepTextView2);
+        textView3 = view.findViewById(R.id.step_by_stepTextView3);
+        textView4 = view.findViewById(R.id.step_by_stepTextView4);
+        textView5 = view.findViewById(R.id.step_by_stepTextView5);
+        textView6 = view.findViewById(R.id.step_by_stepTextView6);
+        textView7 = view.findViewById(R.id.step_by_stepTextView7);
+        textView_answer = view.findViewById(R.id.step_by_stepTextView_answer);
+        player1Score = activity.findViewById(R.id.player_1_score);
+        player2Score = activity.findViewById(R.id.player_2_score);
+        points_right = view.findViewById(R.id.step_by_stepTextView_points_right);
 
-        isOnline = Data.isOnline;
-        gameActivity = (GameActivity) getActivity();
-        scoreTimer = gameActivity.findViewById(R.id.time);
-        player2UserName = activity.findViewById(R.id.player2Name);
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.pop_up_dialog);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
 
-
-
+        Button ok = dialog.findViewById(R.id.ok_dialog);
+        Button cancel = dialog.findViewById(R.id.cancel_dialog);
+        EditText editText = dialog.findViewById(R.id.pop_up);
         //neki if sa savedInstanceState koji ce da kaze koja je runda
         if (getArguments() == null) {
             TempGetDataMethod("runda1");
         }else {
             TempGetDataMethod("runda2");
         }
-
-        Button confirm =  view.findViewById(R.id.korakpokorak_confirm);
-//        EditText answer = view.findViewById(R.id.korakpokorak_answer);
-        confirm.setOnClickListener(new View.OnClickListener() {
+        textView_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isOnline && !isMyTurn){
-                    Toast.makeText(getActivity(),"Nije tvoj red", Toast.LENGTH_SHORT).show();
-
+                Log.i("mqtt", "MyTurn: " + isMyTurn);
+                if(isMyTurn){
+                    dialog.show();
                 }
-                else {
-                    String editText1 = textView_answer.getText().toString();
-                    if (textView_answer.toString() != "") {
-                        if (editText1.equals(response)) {
-                            isOkButtonClicked = true;
-                            countDownTimer.cancel();
-                            isCorect();
-                            Log.i("mqtt", "Pre nego sto se proveri da li je saveInstanceState == null, " + "saveInstanceState: " + savedInstanceState);
-                            if (isOnline) {
-                                if (getArguments() == null) {
-                                    //                                    isOkButtonClicked = false;
-                                    Log.i("mqtt", "IsFirstRound = true");
-                                    mqttHandler.korakPoKorakPublish(textView_answer, true, false);
-                                    isFragment(true);
-                                    //                                    viewModel.setIsFirstRound(false);
-                                    //                                } else if(isFirstRound == false && isOkButtonClicked) {
-                                } else {
-                                    //                            isOkButtonClicked = false;
-                                    Log.i("mqtt", "IsFirstRound = false");
-                                    mqttHandler.korakPoKorakPublish(textView_answer, false, false);
-                                    isFragment(false);
-                                    //                            viewModel.setIsFirstRound(true);
-                                    //                                }
-                                    //                            });
-                                }
-                            }
-                            for (Map.Entry<Integer, TextView> entry : textViwMap.entrySet()) {
-                                TextView textView = entry.getValue();
-                                textView.setTextColor(Color.RED);
-                            }
-                        } else {
-                            Toast.makeText(getActivity(), "Pokusaj ponovo", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                if(!isOnline){
+                    dialog.show();
                 }
-//                dialog.dismiss();
             }
         });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                isTrue(editText.toString());
+                String editText1 = editText.getText().toString();
+                String response = textViwMap.get(8).getText().toString();
+                if (textView_answer.toString() != "") {
+                    if (editText1.equals(response)) {
+                        isOkButtonClicked = true;
+                        countDownTimer.cancel();
+                        isCorect();
+                        Log.i("mqtt", "Pre nego sto se proveri da li je saveInstanceState == null, "+ "saveInstanceState: " + savedInstanceState);
+//                        if (viewModel.getIsFirstRoundLiveData() != null) {
+//                            viewModel.getIsFirstRoundLiveData().observe(getViewLifecycleOwner(), isFirstRound -> {
+//                                if (isFirstRound == true && isOkButtonClicked) {
+                        if(isOnline){
+                            if(getArguments() == null) {
+                                //                                    isOkButtonClicked = false;
+                                Log.i("mqtt", "IsFirstRound = true");
+                                mqttHandler.korakPoKorakPublish(textView_answer, true, false);
+                                isFragment(true);
+                                //                                    viewModel.setIsFirstRound(false);
+                                //                                } else if(isFirstRound == false && isOkButtonClicked) {
+                            }else{
+                                //                            isOkButtonClicked = false;
+                                Log.i("mqtt", "IsFirstRound = false");
+                                mqttHandler.korakPoKorakPublish(textView_answer, false, false);
+                                isFragment(false);
+                                //                            viewModel.setIsFirstRound(true);
+                                //                                }
+                                //                            });
+                            }
+                        }
+//                        Log.i("mqtt","counter1: "+ counter1);!!!!!!!!!!!!!!!!
+//                        viewModel.getIsFirstRoundLiveData().observe(getViewLifecycleOwner(), isFirstRound -> {
+//                            Log.i("mqtt","isFirstRound in MyViewModel: " + isFirstRound);
+//                            if (isFirstRound != null) {
+//                                if(isFirstRound){
+//                                    viewModel.setIsFirstRound(false);
+//                                    Log.i("mqtt", "Posle nego sto se proveri da li je saveInstanceState == null i ako JESTE posalje se publish koji kaze da je isFirstRund = true");
+////                                    mqttHandler.korakPoKorakPublish(textView_answer,true, false );
+//                                    isFragment(true);
+//                                }else{
+//                                    viewModel.setIsFirstRound(true);
+//                                    Log.i("mqtt", "Posle nego sto se proveri da li je saveInstanceState == null i ako NIJE posalje se publish koji kaze da je isFirstRund = false");
+////                                    mqttHandler.korakPoKorakPublish(textView_answer, false, false);
+//                                    isFragment(false);
+//                                }
+//                            }
+//                        });!!!!!!!!!!
+//                        if(savedInstanceState == null){
+//                            isFirstRound = savedInstanceState.getBoolean("isFirstRound", true);
+//                            Log.i("mqtt", "Posle nego sto se proveri da li je saveInstanceState == null i ako JESTE posalje se publish koji kaze da je isFirstRund = true");
+//                            mqttHandler.korakPoKorakPublish(textView_answer,true, false );
+//                            isFragment(true);
+////                            savedInstanceState.remove("isFirstRound");
+//                        }else{
+//                            isFirstRound = savedInstanceState.getBoolean("isFirstRound", false);
+//                            Log.i("mqtt", "Posle nego sto se proveri da li je saveInstanceState == null i ako NIJE posalje se publish koji kaze da je isFirstRund = false");
+//                            mqttHandler.korakPoKorakPublish(textView_answer, false, false);
+//                            isFragment(false);
+////                            savedInstanceState.remove("isFirstRound");
+//                        }
+
+                        for (Map.Entry<Integer, TextView> entry : textViwMap.entrySet()) {
+                            TextView textView = entry.getValue();
+                            textView.setTextColor(Color.RED);
+                        }
+                    }else {
+                        Toast.makeText(getActivity(),"Pokusaj ponovo", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                dialog.dismiss();
+            }
+        });
+
+
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getParentFragmentManager().beginTransaction()
+//                        .replace(R.id.fragment_container, new MyNumberFragment())
+//                        .setReorderingAllowed(true)
+//                        .commit();
+//            }
+//        });
         return view;
     }
 
@@ -222,53 +293,85 @@ public class KorakPoKorakFragment extends Fragment {
         }
         score = Integer.parseInt((String) player1Score.getText());
         if(x == 1){
+            points_right.setText("10");
             score += 10;
         }else if(x == 2){
+            points_right.setText("12");
             score += 12;
         }else if(x == 3){
+            points_right.setText("14");
             score += 14;
         }else if(x == 4){
+            points_right.setText("16");
             score += 16;
         }else if(x == 5){
+            points_right.setText("18");
             score += 18;
         }else if(x == 6){
+            points_right.setText("20");
             score += 20;
         }
         isAnswerCorrect = true;
         player1Score.setText(score + "");
-
+        Data.loggedInUser.setKorakPoKorak(Data.loggedInUser.getKorakPoKorak()+score);
         if(isOnline){
-            Data.loggedInUser.setKorakPoKorak(Data.loggedInUser.getKorakPoKorak()+score);
             userRepository.updateKorakPoKorak(Data.loggedInUser, Data.loggedInUser.getKorakPoKorak()+score);
             mqttHandler.pointPublish(score);
         }
+        points_right.setTextColor(Color.RED);
         if(!isOnline){
             getParentFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frameLayout2, new AsocijacijeFragment())
+                    .replace(R.id.fragment_container, new AssociationsFragment())
                     .setReorderingAllowed(true)
                     .commit();
         }
     }
 
     public void isFragment(boolean bool) {
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
         if (isAdded()) {
             if(bool){
                 getParentFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frameLayout2, KorakPoKorakFragment.   newInstance(true, true))
+                        .replace(R.id.fragment_container, StepByStepFragment.newInstance(true, true))
                         .setReorderingAllowed(true)
                         .commit();
             }else{
                 getParentFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frameLayout2, new AsocijacijeFragment())
+                        .replace(R.id.fragment_container, new AssociationsFragment())
                         .setReorderingAllowed(true)
                         .commit();
             }
         }
+
+//            }
+//        });
     }
 
+
+    //    public void isFragment(boolean bool){
+//        if(bool){
+//            getParentFragmentManager()
+//                    .beginTransaction()
+////                    .detach(StepByStepFragment.this)
+////                    .attach(new StepByStepFragment())
+//                    .replace(R.id.fragment_container, StepByStepFragment.class, null)
+//                    .setReorderingAllowed(true)
+//                    .commit();}
+//        else{
+//            getParentFragmentManager()
+//                    .beginTransaction()
+////                    .detach(StepByStepFragment.this)
+////                    .attach(new SkockoFragment())
+//                    .replace(R.id.fragment_container, SkockoFragment.class, null)
+//                    .setReorderingAllowed(true)
+//                    .commit();
+//        }
+//    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -276,13 +379,12 @@ public class KorakPoKorakFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
         activity = (AppCompatActivity) getActivity();
-//        player2UserName = activity.findViewById(R.id.player2Name)
 
-        String p2name = "";
-        if(isOnline){
-            p2name = Data.user2.getUsername();
-        }
-        if(Data.loggedInUser != null && !p2name.equals("Guest")){
+        TextView scoreTimer = activity.findViewById(R.id.score_timer);
+
+        player2UserName = activity.findViewById(R.id.player_2_user_name);
+
+        if(Data.loggedInUser != null && !player2UserName.getText().toString().equals("Guest")){
             mqttHandler.korakPoKorakSubscribe(new MqttHandler.KorakPoKorakCallback() {
                 @Override
                 public void onCallBack(KorakPoKorak korakPoKorak) {
@@ -323,16 +425,17 @@ public class KorakPoKorakFragment extends Fragment {
                                         public void onFinish() {
                                             scoreTimer.setText("00:00");
                                             if(savedInstanceState == null){
-                                                getParentFragmentManager().beginTransaction().replace(R.id.frameLayout2, new KorakPoKorakFragment().newInstance(true, true)).commit();
+                                                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, new StepByStepFragment().newInstance(true, true)).commit();
                                                 isFirstRound = false;
                                             }else{
                                                 associationsFragment.setIsOnline(true);
-                                                getParentFragmentManager().beginTransaction().replace(R.id.frameLayout2, associationsFragment).commit();
+                                                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, associationsFragment).commit();
                                             }
                                         }
                                     }.start();
                                 }
                             }
+//                            }
                         });
                     }
                 }
@@ -351,7 +454,7 @@ public class KorakPoKorakFragment extends Fragment {
             });
         }
 
-//        ShowHideElements.showScoreBoard(activity);
+        ShowHideElements.showScoreBoard(activity);
 
         countDownTimer = new CountDownTimer(70000, 1000) {
             @Override
@@ -380,12 +483,7 @@ public class KorakPoKorakFragment extends Fragment {
                 Long min = ((l / 1000) % 3600) / 60;
                 Long sec = (l / 1000) % 60;
                 String format = String.format(Locale.getDefault(), "%02d:%02d", min, sec);
-                if (scoreTimer != null) {
-                    scoreTimer.setText(format);
-                } else {
-                    Log.e("YourTag", "scoreTimer is null");
-                }
-
+                scoreTimer.setText(format);
             }
 
             @Override
@@ -395,7 +493,7 @@ public class KorakPoKorakFragment extends Fragment {
                 if(!isOnline){
                     getParentFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.frameLayout2, new AsocijacijeFragment())
+                            .replace(R.id.fragment_container, new AssociationsFragment())
                             .setReorderingAllowed(true)
                             .commit();
                 }
@@ -430,6 +528,10 @@ public class KorakPoKorakFragment extends Fragment {
 //                }
 //            }
         }.start();
+
+        activity.getSupportActionBar().hide();
+
+        ShowHideElements.lockDrawerLayout(activity);
     }
 
     @Override
@@ -437,7 +539,14 @@ public class KorakPoKorakFragment extends Fragment {
         super.onStop();
 
         countDownTimer.cancel();
+
+        ShowHideElements.hideScoreBoard(activity);
+
+        activity.getSupportActionBar().show();
+
+        ShowHideElements.unlockDrawerLayout(activity);
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -447,9 +556,30 @@ public class KorakPoKorakFragment extends Fragment {
         counter1 = 1;
         editor.apply();
     }
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putBoolean("isFirsRound", isFirstRound);
+//    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("isFirstRound", isFirstRound);
         super.onSaveInstanceState(outState);
     }
-}
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putBoolean(KEY_STATE, isFirstRound);
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//
+//        if (myTask != null) {
+//            myTask.cancel(true);
+//        }
+//    }
+
+}}

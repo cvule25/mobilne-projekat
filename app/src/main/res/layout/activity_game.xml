@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/score1_parent"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -39,10 +40,15 @@
                     android:textColor="@color/white"/>
             </LinearLayout>
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Score:"
+                android:textColor="@color/white"/>
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/player1Score"
-                    android:text="Score: 0"
+                    android:text="0"
                 android:textColor="@color/white"/>
         </LinearLayout>
 <!--        Time-->
@@ -73,7 +79,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/score2_parent">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,17 +96,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Score:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/player2Score"
                 android:textColor="@color/white"
-                android:text="Score: 0"/>
+                android:text="0"/>
         </LinearLayout>
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frameLayout2"
-        android:name="com.example.ma_projekat.gameFragments.KoZnaZnaFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_koznazna" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

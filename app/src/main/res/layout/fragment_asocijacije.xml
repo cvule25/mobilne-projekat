@@ -7,7 +7,12 @@
     android:orientation="vertical"
     android:background="@drawable/home_background"
     android:gravity="center">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Whose Turn"
+            android:textColor="@color/white"
+            android:id="@+id/whose_turn"/>
         <LinearLayout
             android:layout_marginTop="0dp"
             android:layout_width="wrap_content"
@@ -119,7 +124,7 @@
                 android:layout_width="150dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:text="A Answer"
+                android:text=""
                 android:textSize="15sp"
                 android:textAlignment="center"
                 android:background="@drawable/rounded_edge_smaller"/>
@@ -129,7 +134,7 @@
                 android:layout_width="150dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:text="B Answer"
+                android:text=""
                 android:textSize="15sp"
                 android:textAlignment="center"
                 android:background="@drawable/rounded_edge_smaller"/>
@@ -144,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="this"
                 android:text="NG"
+                android:visibility="invisible"
                 android:backgroundTint="@color/form_blue"
                 tools:ignore="OnClick"/>
 
@@ -152,7 +158,7 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:text="Answer"
+                android:text=""
                 android:textAlignment="center"
                 android:background="@drawable/rounded_edge_smaller"/>
 
@@ -178,7 +184,7 @@
                 android:layout_width="150dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:text="C Answer"
+                android:text=""
                 android:textSize="15sp"
                 android:textAlignment="center"
                 android:background="@drawable/rounded_edge_smaller"/>
@@ -188,7 +194,7 @@
                 android:layout_width="150dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:text="D Answer"
+                android:text=""
                 android:textSize="15sp"
                 android:textAlignment="center"
                 android:background="@drawable/rounded_edge_smaller"/>

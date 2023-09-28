@@ -21,17 +21,26 @@
             android:title="Register"/>
 
         <item
+            android:id="@+id/logout"
+            android:icon="@drawable/baseline_login_24"
+            android:visible="false"
+            android:title="Logout"/>
+
+        <item
             android:id="@+id/profile"
+            android:visible="false"
             android:icon="@drawable/baseline_manage_accounts_24"
             android:title="Profile"/>
 
         <item
             android:id="@+id/friends"
+            android:visible="false"
             android:icon="@drawable/baseline_face_24"
             android:title="Friends"/>
 
         <item
             android:id="@+id/leaderboard"
+            android:visible="false"
             android:icon="@drawable/baseline_leaderboard_24"
             android:title="Leaderboard"/>
 
