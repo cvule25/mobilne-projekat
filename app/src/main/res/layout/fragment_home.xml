@@ -119,8 +119,14 @@
             <Button
                 android:layout_width="110dp"
                 android:layout_height="50dp"
-                android:text="Play"
+                android:text="Online"
                 android:id="@+id/playButton"
+                android:backgroundTint="@color/form_blue"/>
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:text="Solo"
+                android:id="@+id/soloButton"
                 android:backgroundTint="@color/form_blue"/>
         </LinearLayout>
     </LinearLayout>

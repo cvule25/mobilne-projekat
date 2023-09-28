@@ -25,20 +25,27 @@
             android:textAlignment="center"/>
 
 
-
-
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <TextView
+        <Button
+            android:id="@+id/mojbroj_dobijenBroj"
+            android:layout_width="160dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="0000"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_edge_smaller"/>
+        <Button
             android:id="@+id/mojbroj_generisibroj"
             android:layout_width="160dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="GENERISI BROJ"
+            android:text="STOP"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
 
@@ -54,7 +61,7 @@
 
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Rezulat"
+            android:text=""
             android:textColor="@color/black"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
@@ -67,57 +74,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <TextView
+        <Button
             android:id="@+id/mojbroj_broj1"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Broj 1"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_broj2"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Broj 2"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_broj3"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Broj 3"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_broj4"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Broj 4"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_broj5"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Broj 5"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_broj6"
             android:layout_width="60dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Broj 6"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
 
@@ -128,7 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <TextView
+        <Button
             android:id="@+id/mojbroj_plus"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
@@ -137,7 +144,7 @@
             android:text="+"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_minus"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
@@ -146,7 +153,7 @@
             android:text="-"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_mnozenje"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
@@ -155,7 +162,7 @@
             android:text="*"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_deljenje"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
@@ -164,7 +171,7 @@
             android:text=":"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_levazagrada"
             android:layout_width="60dp"
             android:layout_marginRight="5dp"
@@ -173,7 +180,7 @@
             android:text="("
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_desnazagrada"
             android:layout_width="60dp"
             android:layout_gravity="center"
@@ -190,7 +197,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <TextView
+        <Button
             android:id="@+id/mojbroj_potrvdi"
             android:layout_width="190dp"
 
@@ -198,17 +205,17 @@
             android:layout_height="wrap_content"
             android:text="POTRVDI"
             android:layout_marginRight="5dp"
-            android:textColor="@color/green"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
-        <TextView
+        <Button
             android:id="@+id/mojbroj_ponisti"
             android:layout_width="190dp"
 
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="PONISTI"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:background="@drawable/rounded_edge_smaller"/>
 
@@ -226,6 +233,13 @@
         android:text="END"
         android:backgroundTint="@color/form_blue"
         tools:ignore="OnClick"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/playerAttempt"
+        android:text="Azaza"
+        android:visibility="invisible" />
 
 
 </LinearLayout>

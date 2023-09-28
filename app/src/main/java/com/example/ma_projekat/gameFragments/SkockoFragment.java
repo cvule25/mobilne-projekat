@@ -22,7 +22,7 @@ public class SkockoFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment nextGame = new StepByStepFragment();
+                Fragment nextGame = new KorakPoKorakFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frameLayout2, nextGame);
                 transaction.addToBackStack(null);

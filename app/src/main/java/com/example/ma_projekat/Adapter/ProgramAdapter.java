@@ -14,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ma_projekat.Model.Data;
 import com.example.ma_projekat.Model.User;
 import com.example.ma_projekat.R;
+import com.example.ma_projekat.menuFragments.LoadingScreenFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramAdapter extends ArrayAdapter<String> {
     AppCompatActivity activity;
+
+    View view;
     Context context;
     String[] title;
     String[] description;
@@ -58,24 +61,12 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         if(title != null && description != null){
             TextView title = singleitem.findViewById(R.id.titleId);
             TextView description = singleitem.findViewById(R.id.descriptionId);
-            TextView playButton = singleitem.findViewById(R.id.rank_friendly_1v1);
+
 
 
             title.setText(this.title[position]);
             description.setText(this.description[position]);
-            playButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (Data.loggedInUser == null) {
-                        Toast.makeText(context, "Please log in/register", Toast.LENGTH_SHORT).show();
-                    } else {
-                        activity.getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, new LoadingScreenFragment())
-                                .commit();
-                    }
-                }
-            });
+
         }
         else{
             TextView title = singleitem.findViewById(R.id.titleId);

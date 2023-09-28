@@ -51,6 +51,7 @@
 
                     <EditText
                         android:layout_width="match_parent"
+                        android:id="@+id/email_register"
                         android:layout_height="40dp"
                         android:hint="Enter email address"
                         android:textColor="@color/black"
@@ -77,6 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:hint="Enter username"
+                        android:id="@+id/username_register"
                         android:textColor="@color/black"
                         android:paddingLeft="7dp"
                         android:textColorHint="@color/form_hint"
@@ -102,6 +104,7 @@
                         android:layout_height="40dp"
                         android:hint="Enter password"
                         android:textColor="@color/black"
+                        android:id="@+id/password_register"
                         android:paddingLeft="7dp"
                         android:textColorHint="@color/form_hint"
                         android:inputType="textPassword"
@@ -127,6 +130,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:hint="Repeat password"
+                        android:id="@+id/passwordRepeat_register"
                         android:textColor="@color/black"
                         android:paddingLeft="7dp"
                         android:textColorHint="@color/form_hint"
@@ -147,6 +151,7 @@
             <Button
                 android:layout_width="110dp"
                 android:layout_height="50dp"
+                android:id="@+id/register_btn"
                 android:layout_marginRight="50dp"
                 android:text="Register"
                 android:backgroundTint="@color/form_blue"/>

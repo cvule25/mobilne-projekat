@@ -107,6 +107,7 @@ public class UserRepository {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.exists()){
+                                    Log.i("loggin", "yes document");
                                     User user = document.toObject(User.class);
                                     fireStoreCallback.onCallBack(user);
                                 }else {

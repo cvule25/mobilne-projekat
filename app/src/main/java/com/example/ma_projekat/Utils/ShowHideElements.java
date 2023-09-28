@@ -8,15 +8,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.ma_projekat.R;
 
 public class ShowHideElements {
-    public static void showScoreBoard(Activity activity) {
-
-        activity.findViewById(R.id.score_board).setVisibility(View.VISIBLE);
-    }
-
-    public static void hideScoreBoard(Activity activity) {
-
-        activity.findViewById(R.id.score_board).setVisibility(View.GONE);
-    }
+//    public static void showScoreBoard(Activity activity) {
+//
+//        activity.findViewById(R.id.score_board).setVisibility(View.VISIBLE);
+//    }
+//
+//    public static void hideScoreBoard(Activity activity) {
+//
+//        activity.findViewById(R.id.score_board).setVisibility(View.GONE);
+//    }
 
     public static void lockDrawerLayout(Activity activity) {
 

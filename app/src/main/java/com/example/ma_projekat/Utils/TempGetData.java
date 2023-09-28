@@ -43,9 +43,9 @@ public class TempGetData {
         });
     }
 
-    public static void getKorakPoKorak(FireStoreCallback firestoreCallback) {
+    public static void getKorakPoKorak(FireStoreCallback firestoreCallback, String runda) {
         ArrayList<String> list = new ArrayList<String>();
-        db.collection("Games").document("KorakPoKorak")
+        db.collection("Games").document("KorakPoKrak")
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -70,7 +70,7 @@ public class TempGetData {
 
     }
 
-    public static void getAsocijacije(FireStoreCallback firestoreCallback) {
+    public static void getAsocijacije(FireStoreCallback firestoreCallback, String runda) {
         ArrayList<String> list = new ArrayList<String>();
         db.collection("Games").document("Asocijacije")
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -107,7 +107,7 @@ public class TempGetData {
 
 
 
-    public static void getDataAsMap(FireStoreCallback1 firestoreCallback) {
+    public static void getDataAsMap(FireStoreCallback1 firestoreCallback, String runda) {
         db.collection("Games").document("Spojnice")
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override

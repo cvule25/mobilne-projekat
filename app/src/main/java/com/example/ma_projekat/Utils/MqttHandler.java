@@ -2,12 +2,14 @@ package com.example.ma_projekat.Utils;
 
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ma_projekat.Model.Asocijacije;
 import com.example.ma_projekat.Model.Data;
 import com.example.ma_projekat.Model.Hyphens;
 import com.example.ma_projekat.Model.KorakPoKorak;
+import com.example.ma_projekat.Model.MojBroj;
 import com.example.ma_projekat.Model.SkockoDTO;
 import com.example.ma_projekat.Model.StrDTO;
 import com.example.ma_projekat.Model.User;
@@ -485,11 +487,6 @@ public class MqttHandler {
         return isMyTurn;
     }
 
-//    public Hyphens getP2Hyphens() {
-////        Hyphens hyphens1 = new Hyphens(2131230830,"a", Color.RED);
-//        Log.i("mqtt", hyphens + "to je to");
-//        return hyphens;
-//    }
 
     public interface TextViewStoreCallback {
         void onCallBack(Hyphens hyphens);
@@ -505,6 +502,51 @@ public class MqttHandler {
 
     public interface KorakPoKorakCallback {
         void onCallBack(KorakPoKorak korakPoKorak);
+    }
+
+    public void mojBrojSubscribe(MojBrojCallback mojBrojCallback) {
+
+        client.toAsync().subscribeWith()
+                .topicFilter("Mobilne/MojBroj")
+                .qos(MqttQos.AT_LEAST_ONCE)
+                .callback(mqtt5Publish -> {
+                    MojBroj mojBroj = gson.fromJson(StandardCharsets.UTF_8.decode(mqtt5Publish.getPayload().get()).toString(), MojBroj.class);
+                    if (!Objects.equals(mojBroj.getUserName(), Data.loggedInUser.getUsername())){
+                        mojBrojCallback.onCallBack(mojBroj);
+                        Log.i("mqtt", "Subscribe moguce null: "+ mojBroj+"");
+                    }
+                })
+                .send()
+                .whenComplete((mqtt5SubAck, throwable) -> {
+                    if (throwable != null) {
+                        Log.i("mqtt", "MojBroj Subscribe Error");
+                        throwable.printStackTrace();
+                    } else {
+                        Log.i("mqtt", "Subscribed to MojBroj");
+                    }
+                });
+    }
+
+    public void mojBrojPublish(Button button) {
+        MojBroj mojBroj = new MojBroj(button.getId(), button.getText().toString(),false, false, Data.loggedInUser.getUsername());
+        String sent = gson.toJson(mojBroj, MojBroj.class);
+        client.toAsync().publishWith()
+                .topic("Mobilne/MojBroj")
+                .qos(MqttQos.AT_LEAST_ONCE)
+                .payload(sent.getBytes())
+                .send()
+                .whenComplete((mqtt5PublishResult, throwable) -> {
+                    if (throwable != null) {
+                        Log.i("mqtt", "MojBroj Publish Error");
+                        throwable.printStackTrace();
+                    } else {
+                        Log.i("mqtt", "Published MojBroj");
+                    }
+                });
+        Log.i("mqtt","U publisu User salje: "+Data.loggedInUser.getUsername());
+    }
+    public interface MojBrojCallback {
+        void onCallBack(MojBroj mojBroj);
     }
 
     public String getString1(){
